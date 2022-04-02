@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import util.BinaryTreePrint;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BinaryTreeTest {
@@ -94,6 +97,90 @@ class BinaryTreeTest {
         tree.setRoot(root);
         int after = tree.size();
         assertEquals(before+5, after);
+    }
+
+    @Test
+    void TestContainsElementIfExpected(){
+        createATree();
+        assertTrue(tree.contains(4));
+    }
+
+    @Test
+    void TestInOrderTraversal(){
+        createATree();
+        ArrayList<Integer> actual = tree.inOrder();
+        ArrayList<Integer> expected = new ArrayList<>(
+                Arrays.asList(1,2,3,4,5)
+        );
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void TestPreOrderTraversal(){
+        createATree();
+        ArrayList<Integer> actual = tree.preOrder();
+        ArrayList<Integer> expected = new ArrayList<>(
+                Arrays.asList(4,2,1,3,5)
+        );
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void TestPostOrderTraversal(){
+        createATree();
+        ArrayList<Integer> actual = tree.postOrder();
+        ArrayList<Integer> expected = new ArrayList<>(
+                Arrays.asList(1,3,2,5,4)
+        );
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void TestLevelOrderTraversal(){
+        createATree();
+        ArrayList<Integer> actual = tree.levelOrder();
+        ArrayList<Integer> expected = new ArrayList<>(
+                Arrays.asList(4,2,5,1,3)
+        );
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void TestHeightOnEmptyTree(){
+        assertEquals(-1,tree.height());
+    }
+
+    @Test
+    void TestHeightOnRootOnly(){
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(4);
+        tree.setRoot(root);
+
+        assertEquals(0, tree.height());
+    }
+
+    @Test
+    void TestHeightOnTreeWithChild(){
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(4);
+        BinaryTreeNode<Integer> l1 = new BinaryTreeNode<>(2);
+        root.addLeftChild(l1);
+        tree.setRoot(root);
+
+        assertEquals(1,tree.height());
+    }
+
+
+    private void createATree() {
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(4);
+        BinaryTreeNode<Integer> l1 = new BinaryTreeNode<>(2);
+        BinaryTreeNode<Integer> l2 = new BinaryTreeNode<>(1);
+        BinaryTreeNode<Integer> r1 = new BinaryTreeNode<>(5);
+        BinaryTreeNode<Integer> r2 = new BinaryTreeNode<>(3);
+        root.addLeftChild(l1);
+        l1.addLeftChild(l2);
+        l1.addRightChild(r2);
+        root.addRightChild(r1);
+        tree.setRoot(root);
     }
 
 

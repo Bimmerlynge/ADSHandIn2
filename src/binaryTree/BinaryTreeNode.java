@@ -19,12 +19,10 @@ public class BinaryTreeNode<E> {
     }
 
     public void addLeftChild(BinaryTreeNode<E> leftChild) {
-        if (this.leftChild == null)
         this.leftChild = leftChild;
     }
 
     public void addRightChild(BinaryTreeNode<E> rightChild) {
-        if (this.rightChild == null)
         this.rightChild = rightChild;
     }
 
